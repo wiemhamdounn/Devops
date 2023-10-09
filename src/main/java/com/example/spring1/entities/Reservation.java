@@ -14,9 +14,38 @@ public class Reservation  implements Serializable {
     String idReservation ;
     Date anneeUniversite ;
     boolean estValide ;
-    @ManyToOne
-    Chambre chambre;
     @ManyToMany(mappedBy="reservations", cascade = CascadeType.ALL)
     private Set<Etudiant> etudiants;
 
+    public String getIdReservation() {
+        return idReservation;
+    }
+
+    public void setIdReservation(String idReservation) {
+        this.idReservation = idReservation;
+    }
+
+    public Date getAnneeUniversite() {
+        return anneeUniversite;
+    }
+
+    public void setAnneeUniversite(Date anneeUniversite) {
+        this.anneeUniversite = anneeUniversite;
+    }
+
+    public boolean isEstValide() {
+        return estValide;
+    }
+
+    public void setEstValide(boolean estValide) {
+        this.estValide = estValide;
+    }
+
+    public Set<Etudiant> getEtudiants() {
+        return etudiants;
+    }
+
+    public void setEtudiants(Set<Etudiant> etudiants) {
+        this.etudiants = etudiants;
+    }
 }
