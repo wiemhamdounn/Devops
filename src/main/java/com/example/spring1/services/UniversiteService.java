@@ -1,11 +1,14 @@
 package com.example.spring1.services;
 
+import com.example.spring1.entities.Bloc;
 import com.example.spring1.entities.Foyer;
 import com.example.spring1.entities.Universite;
 import com.example.spring1.repositories.UniversiteRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class UniversiteService implements IUniversiteRepository{
     UniversiteRepository universiteRepository;
 
@@ -30,18 +33,10 @@ public class UniversiteService implements IUniversiteRepository{
 
     @Override
     public Universite updateUniversite(Universite universite) {
-
-        long idUniversite = universite.getIdUniversite();
-
-        Universite existingUniversite = universiteRepository.findById(idUniversite).orElse(null);
-
-        if (existingUniversite != null) {
-            existingUniversite.setNomUniversite(existingUniversite.getNomUniversite());
-            existingUniversite.setAdresse(existingUniversite.getAdresse());
-            return universiteRepository.save(existingUniversite);
-        } else {
-            return null;
-        }
+        Universite u = universiteRepository.findById(universite.getIdUniversite()).orElseThrow(() -> new EntityNotFoundException("No Bloc with id " + universite.getIdUniversite() + " was found!"));
+        if (u!=null){
+            universiteRepository.save(universite);}
+        return u;
     }
 
     @Override

@@ -3,9 +3,11 @@ package com.example.spring1.services;
 import com.example.spring1.entities.Bloc;
 import com.example.spring1.entities.Chambre;
 import com.example.spring1.repositories.ChambreRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ChambreService implements IChambreInterface{
     ChambreRepository chambreRepository;
 
@@ -30,20 +32,10 @@ public class ChambreService implements IChambreInterface{
 
     @Override
     public Chambre updateChambre(Chambre chambre) {
-        long idChambre = chambre.getIdChambre();
-
-        Chambre existingChambre = chambreRepository.findById(idChambre).orElse(null);
-
-        if (existingChambre != null) {
-            existingChambre.setNumeroChambre(existingChambre.getNumeroChambre());
-            existingChambre.setTypeC(existingChambre.getTypeC());
-            existingChambre.setBloc(existingChambre.getBloc());
-            existingChambre.setReservations(existingChambre.getReservations());
-
-            return chambreRepository.save(existingChambre);
-        } else {
-            return null;
-        }
+        Chambre ch= chambreRepository.findById(chambre.getIdChambre()).orElseThrow(() -> new EntityNotFoundException("No chambre with id " + chambre.getIdChambre() + " was found!"));
+        if (ch!=null){
+            chambreRepository.save(chambre);}
+        return ch;
     }
 
     @Override

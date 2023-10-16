@@ -1,11 +1,14 @@
 package com.example.spring1.services;
 
+import com.example.spring1.entities.Bloc;
 import com.example.spring1.entities.Etudiant;
 import com.example.spring1.entities.Foyer;
 import com.example.spring1.repositories.FoyerRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class FoyerService implements IFoyerRepository{
     FoyerRepository foyerRepository;
 
@@ -30,19 +33,10 @@ public class FoyerService implements IFoyerRepository{
 
     @Override
     public Foyer updateFoyer(Foyer foyer) {
-        long idFoyer = foyer.getIdFoyer();
-
-        Foyer existingFoyer = foyerRepository.findById(idFoyer).orElse(null);
-
-        if (existingFoyer != null) {
-            existingFoyer.setCapaciteFoyer(existingFoyer.getCapaciteFoyer());
-            existingFoyer.setNomFoyer(existingFoyer.getNomFoyer());
-            existingFoyer.setUniversite(existingFoyer.getUniversite());
-            existingFoyer.setCapaciteFoyer(existingFoyer.getCapaciteFoyer());
-            return foyerRepository.save(existingFoyer);
-        } else {
-            return null;
-        }
+        Foyer f = foyerRepository.findById(foyer.getIdFoyer()).orElseThrow(() -> new EntityNotFoundException("No Foyer with id " + foyer.getIdFoyer() + " was found!"));
+        if (f!=null){
+            foyerRepository.save(foyer);}
+        return f;
     }
 
     @Override
