@@ -1,4 +1,6 @@
 package com.example.spring1.entities;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,9 +21,14 @@ public class Foyer implements Serializable {
     @Column(name = "idFoyer")
     long idFoyer;
     String nomFoyer;
+
     long capaciteFoyer;
-    @OneToOne
+    long capaciteFoyerBloc;
+
+    @OneToOne(mappedBy ="foyer")
      Universite universite;
+    //@JsonManagedReference
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy="foyer")
      Set<Bloc> blocs;
 

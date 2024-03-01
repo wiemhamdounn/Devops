@@ -21,6 +21,8 @@ public class Chambre implements Serializable {
     @Column(name = "idChambre")
     long idChambre ;
     long numeroChambre ;
+    private long capaciteActuelle;
+    private long capaciteMax;
     @Enumerated(EnumType.STRING)
     TypeChambre typeC;
     @ManyToOne

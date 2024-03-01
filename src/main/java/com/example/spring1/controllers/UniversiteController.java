@@ -3,6 +3,7 @@ package com.example.spring1.controllers;
 import com.example.spring1.entities.Etudiant;
 import com.example.spring1.entities.Universite;
 import com.example.spring1.services.IUniversiteRepository;
+import com.example.spring1.services.UniversiteService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,5 +33,10 @@ IUniversiteRepository universiteService;
     @PutMapping("/updateUniversite")
     Universite updateUniversite(@RequestBody Universite universite){
         return   universiteService.updateUniversite(universite);
+    }
+
+    @PutMapping("/universite/{idFoyer}/{idUniversite}")
+    public  Universite affecterFoyerUniversite(@PathVariable long idFoyer, @PathVariable long idUniversite){
+        return universiteService.affecterFoyerUniversite(idFoyer,idUniversite);
     }
 }

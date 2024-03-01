@@ -10,4 +10,6 @@ public interface IBlocService {
   List<Bloc>getAllBlocs();
    void deleteBloc(long idBloc);
    Bloc updateBloc(Bloc bloc);
+    public String affecterBlocAFoyer( long idFoyer, long idBloc) ;
+    public Bloc desaffecterFoyerBloc(long idBloc);
 }

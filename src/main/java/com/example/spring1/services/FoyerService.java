@@ -27,6 +27,11 @@ public class FoyerService implements IFoyerRepository{
     }
 
     @Override
+    public Foyer getFoyerByName(String nomFoyer) {
+        return  foyerRepository.findByNomFoyer(nomFoyer);
+    }
+
+    @Override
     public List<Foyer> getAllFoyers() {
         return foyerRepository.findAll();
     }

@@ -11,4 +11,5 @@ public interface IUniversiteRepository {
     List<Universite> getAllUniversites();
     public  Universite updateUniversite(Universite universite);
     public void deleteUniversite( long idUniversite);
+    public  Universite affecterFoyerUniversite(long idFoyer, long idUniversite);
 }

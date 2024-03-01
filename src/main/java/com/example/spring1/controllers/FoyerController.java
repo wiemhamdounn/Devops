@@ -22,6 +22,10 @@ public class FoyerController {
     Foyer retrieveFoyer(@PathVariable long id){
         return foyerService.getFoyer(id);
     }
+    @GetMapping("/foyer/{nomFoyer}")
+    Foyer getFoyerByName(@PathVariable String nomFoyer ){
+        return  foyerService.getFoyerByName(nomFoyer);
+    }
     @GetMapping("/foyers")
     List<Foyer> retrieveFoyers(){
         return foyerService.getAllFoyers();
@@ -30,8 +34,14 @@ public class FoyerController {
     void deleteFoyer(@PathVariable long id){
         foyerService.deleteFoyer(id);
     }
-    @PutMapping("/updateFoyer")
+    @PutMapping("/updateFoyer/{id}")
     Foyer updateFoyer(@RequestBody Foyer foyer){
         return   foyerService.updateFoyer(foyer);
+    }
+    @GetMapping("/statistiqueCapaciteFoyer")
+    public double calculerMoyenneCapaciteFoyers() {
+        List<Foyer> foyers = foyerService.getAllFoyers();
+        double moyenne = foyers.stream().mapToLong(Foyer::getCapaciteFoyer).average().orElse(0.0);
+        return moyenne;
     }
 }

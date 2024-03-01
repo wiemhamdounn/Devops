@@ -1,9 +1,6 @@
 package com.example.spring1.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +19,8 @@ public class Universite implements Serializable {
     long idUniversite;
     String nomUniversite;
     String adresse;
-
+    @OneToOne
+   private  Foyer foyer;
     public long getIdUniversite() {
         return idUniversite;
     }
@@ -45,5 +43,9 @@ public class Universite implements Serializable {
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+    }
+
+    public void setFoyer(Foyer foyer) {
+        this.foyer = foyer;
     }
 }

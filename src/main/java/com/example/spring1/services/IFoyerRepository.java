@@ -7,7 +7,10 @@ import java.util.List;
 public interface IFoyerRepository {
     Foyer addFoyer(Foyer foyer);
     Foyer  getFoyer(long idFoyer);
+    Foyer  getFoyerByName(String nomFoyer);
+
     List<Foyer> getAllFoyers();
     public  Foyer updateFoyer(Foyer foyer);
     public void deleteFoyer( long idFoyer);
+
 }

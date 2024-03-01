@@ -2,6 +2,7 @@ package com.example.spring1.services;
 
 import com.example.spring1.entities.Bloc;
 import com.example.spring1.entities.Chambre;
+import com.example.spring1.entities.TypeChambre;
 import com.example.spring1.repositories.ChambreRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -42,4 +43,20 @@ public class ChambreService implements IChambreInterface{
     public void deleteChambre(long idChambre) {
         chambreRepository.deleteById(idChambre);
     }
+
+    @Override
+    public List<Chambre> getChambresParNomBloc(String nomBloc) {
+        return chambreRepository.findByBlocNomBloc(nomBloc);
+    }
+
+    @Override
+    public long nbChambreParTypeEtBloc(TypeChambre type, long idBloc) {
+        return chambreRepository.countByTypeCAndBlocIdBloc(type,idBloc);
+    }
+
+
+    public List<Chambre> getChambresNonReserveParNomFoyerEtTypeChambre(String nomFoyer, TypeChambre type) {
+        return chambreRepository.findChambresNonReserveesByNomFoyerAndType(nomFoyer, type);
+    }
+
 }
